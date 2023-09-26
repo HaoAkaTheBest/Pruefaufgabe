@@ -1,0 +1,34 @@
+﻿@page "/find-largestpalindromeproduct"
+@using FirstApp.Helper;
+<h3>Find Largest Palindrome Product</h3>
+
+<p>
+    A palindromic number reads the same both ways. <br />
+    The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.<br />
+    Find the largest palindrome made from the product of two 3-digit numbers.
+
+</p>
+
+<label for="digits">Enter the digits of the factors:</label>
+<input type="number" id="digits" @bind="digits" />
+
+<button @onclick="Find">Find the biggest palindrome product</button>
+
+<div>
+    @if (found)
+    {
+        <p>The largest palindrome product of two @digits - digit numbers is : @largestPalindromeProduct</p>
+    }
+</div>
+
+@code {
+    private int digits = 3;
+    private long largestPalindromeProduct;
+    private bool found;
+
+    private void Find()
+    {
+        largestPalindromeProduct = LargestPalindromeProduct.LargestPalindrome(digits);
+        found = true;
+    }
+}

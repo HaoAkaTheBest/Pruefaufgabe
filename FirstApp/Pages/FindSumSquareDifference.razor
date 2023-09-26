@@ -1,0 +1,37 @@
+﻿@page "/find-sumsquaredifference"
+@using FirstApp.Helper;
+<h3>Find The Difference between sumOfSquare and squareOfSum</h3>
+<p>
+    The sum of the squares of the first ten natural numbers is
+    1² + 2² + … + 10² = 385 <br />
+    The square of the sum of the first ten natural numbers is
+    (1 + 2 + … + 10)² = 55² = 3025<br />
+    Hence the difference between the sum of the squares of the first ten natural numbers and
+    the square of the sum is
+    3025 – 385 = 2640<br />
+    Find the difference between the sum of the squares of the first one hundred natural
+    numbers and the square of the sum
+</p>
+<label for="givenNumber">Enter the Max Natural Number:</label>
+<input type="number" id="givenNumber" @bind="givenNumber" />
+
+<button @onclick="Find">Find Differece</button>
+
+<div>
+    @if (found)
+    {
+        <p>The Difference is : @difference</p>
+    }
+</div>
+
+@code {
+    private int givenNumber = 100;
+    private long difference;
+    private bool found;
+
+    private void Find()
+    {
+        difference = SumSquareDifference.SumSquareDifferenceOfFirst(givenNumber);
+        found = true;
+    }
+}

@@ -1,0 +1,33 @@
+﻿@page "/find-smallestmultiple"
+@using FirstApp.Helper;
+<h3>Find The Smallest Multiple of Numbers from 1 to the Given Number</h3>
+
+<p>
+    2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.<br />
+
+    What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+</p>
+
+<label for="givenNumber">Enter the Max Number:</label>
+<input type="number" id="givenNumber" @bind="givenNumber" />
+
+<button @onclick="Find">Find Smallest Multiple</button>
+
+<div>
+    @if (found)
+    {
+        <p>The Smallest Multiple of Numbers from 1 to @givenNumber prime number is : @product</p>
+    }
+</div>
+
+@code {
+    private int givenNumber = 20;
+    private long product;
+    private bool found;
+
+    private void Find()
+    {
+        product = SmallestMultiple.SmallestMult(givenNumber);
+        found = true;
+    }
+}

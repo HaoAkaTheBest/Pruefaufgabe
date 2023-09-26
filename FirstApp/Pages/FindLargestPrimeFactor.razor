@@ -1,0 +1,31 @@
+﻿@page "/find-largestprimefactor"
+@using FirstApp.Helper;
+<h3>Find Largest Prime Factor</h3>
+
+<p>
+    The prime factors of 13195 are 5, 7, 13 and 29.<br />
+    What is the largest prime factor of the number 600851475143 ?
+</p>
+<label for="findnumber">Enter a number:</label>
+<input type="number" id="findnumber" @bind="findnumber" />
+
+<button @onclick="Find">Find the biggest prime factor</button>
+
+<div>
+    @if (found)
+    {
+        <p>The largest prime factor of the number @findnumber is : @biggestPrimeFactor</p>
+    }
+</div>
+
+@code {
+    private bool found;
+    private long findnumber = 600851475143;
+    private long biggestPrimeFactor;
+
+    private void Find()
+    {
+        biggestPrimeFactor = LargestPrimeFactor.LargestFactor(findnumber);
+        found = true;
+    }
+}

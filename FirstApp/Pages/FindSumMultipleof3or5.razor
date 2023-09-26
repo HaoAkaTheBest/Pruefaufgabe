@@ -1,0 +1,32 @@
+﻿@page "/find-findsummultipleof3or5"
+@using FirstApp.Helper;
+<h3>Find Sum of Multiples of 3 or 5 below Given number</h3>
+
+<p>
+    If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The
+    sum of these multiples is 23.<br />
+    Find the sum of all the multiples of 3 or 5 below 1000.
+</p>
+<label for="givennum">Enter the range of natural numbers:</label>
+<input type="number" id="givennum" @bind="givennum" />
+
+<button @onclick="Find">Find Sum</button>
+
+<div>
+    @if (found)
+    {
+        <p>The sum of multiples of 3 or 5 below @givennum is : @sum</p>
+    }
+</div>
+
+@code {
+    private int givennum = 1000;
+    private long sum;
+    private bool found;
+
+    private void Find()
+    {
+        sum = Multipleof3or5.Result(givennum);
+        found = true;
+    }
+}
