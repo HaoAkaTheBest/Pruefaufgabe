@@ -11,7 +11,7 @@
 </p>
 
 <label for="maxNumber">Enter the maximum Fibonacci number:</label>
-<input type="number" id="maxNumber" @bind="maxNumber" />
+<input type="text" id="maxNumber" @bind="maxNumber" />
 
 <button @onclick="CalculateSum">Calculate Sum of Even Fibonacci Numbers</button>
 
@@ -22,14 +22,32 @@
     }
 </div>
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
 @code {
-    private int maxNumber = 4000000;
+    private string maxNumber = "4000000";
     private long sum;
     private bool calculated;
+    private string errorMessage;
+
+
 
     private void CalculateSum()
     {
-        sum = EvenFibonacciNumbers.Sum(maxNumber);
-        calculated = true;
+        try
+        {
+            sum = EvenFibonacciNumbers.Sum(maxNumber);
+            calculated = true;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        
     }
 }

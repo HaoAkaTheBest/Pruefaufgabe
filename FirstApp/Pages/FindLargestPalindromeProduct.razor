@@ -1,5 +1,6 @@
 ﻿@page "/find-largestpalindromeproduct"
 @using FirstApp.Helper;
+@using FirstApp.Shared;
 <h3>Find Largest Palindrome Product</h3>
 
 <p>
@@ -10,25 +11,43 @@
 </p>
 
 <label for="digits">Enter the digits of the factors:</label>
-<input type="number" id="digits" @bind="digits" />
+<input type="text" id="givenDigits" @bind="givenDigits" />
 
 <button @onclick="Find">Find the biggest palindrome product</button>
 
 <div>
     @if (found)
     {
-        <p>The largest palindrome product of two @digits - digit numbers is : @largestPalindromeProduct</p>
+        <p>The largest palindrome product of two @givenDigits - digit numbers is : @largestPalindromeProduct</p>
     }
 </div>
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
+
 @code {
-    private int digits = 3;
+    private string givenDigits = "3";
     private long largestPalindromeProduct;
     private bool found;
+    private string errorMessage;
 
     private void Find()
     {
-        largestPalindromeProduct = LargestPalindromeProduct.LargestPalindrome(digits);
-        found = true;
+        try
+        {
+            largestPalindromeProduct = LargestPalindromeProduct.LargestPalindrome(givenDigits);
+            found = true;
+        }
+        catch (Exception ex)
+        {
+
+            errorMessage = ex.Message;
+        }
+        
     }
 }

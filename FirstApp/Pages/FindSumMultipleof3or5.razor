@@ -8,7 +8,7 @@
     Find the sum of all the multiples of 3 or 5 below 1000.
 </p>
 <label for="givennum">Enter the range of natural numbers:</label>
-<input type="number" id="givennum" @bind="givennum" />
+<input type="text" id="givennum" @bind="givennum" />
 
 <button @onclick="Find">Find Sum</button>
 
@@ -19,14 +19,30 @@
     }
 </div>
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
 @code {
-    private int givennum = 1000;
+    private string givennum = "1000";
     private long sum;
     private bool found;
+    private string errorMessage;
 
     private void Find()
     {
-        sum = Multipleof3or5.Result(givennum);
-        found = true;
+        try
+        {
+            sum = Multipleof3or5.Result(givennum);
+            found = true;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        
     }
 }

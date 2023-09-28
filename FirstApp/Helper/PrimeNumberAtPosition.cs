@@ -8,8 +8,23 @@ namespace FirstApp.Helper
 {
     public class PrimeNumberAtPosition
     {
-        public static long PrimeNumberAt(int position)
+        public static long PrimeNumberAt(string positionString)
         {
+            int position;
+            try
+            {
+                position = int.Parse(positionString);
+            }
+            catch (System.FormatException)
+            {
+                throw new Exception(positionString + " is not a number or not a valid number for this problem");
+            }
+            catch (System.OverflowException)
+            {
+                throw new Exception(positionString + " is tooooooo biggggg");
+            }
+
+            if(position<1) throw new Exception(positionString + ": Position cannot smaller than 1");
             List<long> primes = new List<long>();
             primes.Add(2);
             long currentNumber = 3;

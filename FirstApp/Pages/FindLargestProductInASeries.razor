@@ -32,7 +32,7 @@
     product. What is the value of this product
 </p>
 <label for="digits">Enter the length of the number:</label>
-<input type="number" id="digits" @bind="digits" />
+<input type="text" id="digits" @bind="digits" />
 
 <button @onclick="Find">Find the biggest @digits digit adjacent product</button>
 
@@ -43,15 +43,30 @@
     }
 </div>
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
 @code {
     private bool found;
-    private int digits = 13;
+    private string digits = "13";
     private long product;
-
+    private string errorMessage;
 
     private void Find()
     {
-        product = LargestProductInASeries.LargestProduct(digits);
-        found = true;
+        try
+        {
+            product = LargestProductInASeries.LargestProduct(digits);
+            found = true;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        
     }
 }

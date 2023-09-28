@@ -8,8 +8,23 @@ namespace FirstApp.Helper
 {
     public class LargestPalindromeProduct
     {
-        public static long LargestPalindrome(int digits)
+        public static long LargestPalindrome(string givenDigits)
         {
+            int digits = 0;
+            try
+            {
+                digits = int.Parse(givenDigits);
+            }
+            catch (System.FormatException)
+            {
+                throw new Exception(givenDigits + " is not a number or not a valid number for this problem");
+            }
+            catch (System.OverflowException)
+            {
+                throw new Exception(givenDigits + " is tooooooo biggggg");
+            }
+            if (digits < 0) throw new Exception(givenDigits + ": The Number must be bigger than 0");
+            if (digits > 5) throw new Exception("The Number is to big, i cant find it");
             if (digits == 1) return 9;
             long max = (int)Math.Pow(10, digits) - 1;
             long min = (int)Math.Pow(10, digits - 1) * 9;

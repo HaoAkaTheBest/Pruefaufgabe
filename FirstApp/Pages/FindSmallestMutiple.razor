@@ -20,14 +20,29 @@
     }
 </div>
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
 @code {
-    private int givenNumber = 20;
+    private string givenNumber = "20";
     private long product;
     private bool found;
+    private string errorMessage;
 
     private void Find()
     {
-        product = SmallestMultiple.SmallestMult(givenNumber);
-        found = true;
+        try
+        {
+            product = SmallestMultiple.SmallestMult(givenNumber);
+            found = true;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
     }
 }

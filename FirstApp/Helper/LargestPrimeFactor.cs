@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,8 +44,18 @@ namespace FirstApp.Helper
             }
             return factors;
         }
-        public static long LargestFactor(long n)
+        public static long LargestFactor(string givenNumber)
         {
+            long n = 0;
+            try
+            {
+                n = long.Parse(givenNumber, CultureInfo.InvariantCulture);
+            }
+            catch (System.FormatException)
+            {
+                throw new Exception(givenNumber + " is not a valid number for this Problem or not even a number");
+            }
+            if (n < 0) throw new Exception(givenNumber + " is a negative number");
             return PrimeFactors(n).Max();
         }
     }

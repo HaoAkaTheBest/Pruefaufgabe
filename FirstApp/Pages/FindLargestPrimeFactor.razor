@@ -7,7 +7,7 @@
     What is the largest prime factor of the number 600851475143 ?
 </p>
 <label for="findnumber">Enter a number:</label>
-<input type="number" id="findnumber" @bind="findnumber" />
+<input type="text" id="findnumber" @bind="findnumber" />
 
 <button @onclick="Find">Find the biggest prime factor</button>
 
@@ -18,14 +18,31 @@
     }
 </div>
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
+
 @code {
     private bool found;
-    private long findnumber = 600851475143;
+    private string findnumber = "600851475143";
     private long biggestPrimeFactor;
+    private string errorMessage;
 
     private void Find()
     {
-        biggestPrimeFactor = LargestPrimeFactor.LargestFactor(findnumber);
-        found = true;
+        try
+        {
+            biggestPrimeFactor = LargestPrimeFactor.LargestFactor(findnumber);
+            found = true;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        
     }
 }

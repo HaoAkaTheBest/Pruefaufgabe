@@ -24,14 +24,30 @@
     }
 </div>
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
 @code {
-    private int givenNumber = 100;
+    private string givenNumber = "100";
     private long difference;
     private bool found;
+    private string errorMessage;
 
     private void Find()
     {
-        difference = SumSquareDifference.SumSquareDifferenceOfFirst(givenNumber);
-        found = true;
+        try
+        {
+            difference = SumSquareDifference.SumSquareDifferenceOfFirst(givenNumber);
+            found = true;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        
     }
 }

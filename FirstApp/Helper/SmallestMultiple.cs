@@ -8,8 +8,23 @@ namespace FirstApp.Helper
 {
     public class SmallestMultiple
     {
-        public static long SmallestMult(int maxDivisor)
+        public static long SmallestMult(string maxDivisorString)
         {
+            int maxDivisor = 0;
+            try
+            {
+                maxDivisor = int.Parse(maxDivisorString);
+            }
+            catch (System.FormatException)
+            {
+                throw new Exception(maxDivisorString + " is not a number or not a valid number for this problem");
+            }
+            catch (System.OverflowException)
+            {
+                throw new Exception(maxDivisorString + " is tooooooo biggggg");
+            }
+
+            if (maxDivisor < 1) throw new Exception(maxDivisorString + ": The number has to be bigger than 1");
             List<long> divisors = new List<long>();
             for (int i = 1; i <= maxDivisor; i++)
             {

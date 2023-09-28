@@ -18,14 +18,29 @@
     }
 </div>
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
 @code {
-    private int givenIndex =10001;
+    private string givenIndex ="10001";
     private long primeNum;
     private bool found;
+    private string errorMessage;
 
     private void Find()
     {
-        primeNum = PrimeNumberAtPosition.PrimeNumberAt(givenIndex);
-        found = true;
+        try
+        {
+            primeNum = PrimeNumberAtPosition.PrimeNumberAt(givenIndex);
+            found = true;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
     }
 }
